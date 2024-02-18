@@ -18,14 +18,14 @@ public class SecurityConfig {
     private JwtAuthenticationEntryPoint point;
     @Autowired
     private JwtAuthenticationFilter filter;
-
+    
     @SuppressWarnings("deprecation")
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests().
-                requestMatchers("/auth/login","/h2-console/**").permitAll().
+                requestMatchers("/auth/login").permitAll().
                 requestMatchers("/private").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

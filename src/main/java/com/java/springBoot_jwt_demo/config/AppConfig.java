@@ -1,5 +1,6 @@
 package com.java.springBoot_jwt_demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,16 +13,30 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.java.springBoot_jwt_demo.entity.UserCredentials;
+import com.java.springBoot_jwt_demo.repository.UserRepo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 public class AppConfig {
+	
+	@Autowired
+	UserRepo userRepository;
 
     //Spring Security class to proceed with login.
     //Uses a spring security pre-built entity-User to store all the details that will be used while login
-    @Bean
+ 
+	@Bean
     public UserDetailsService userDetailsService(){
-        UserDetails userDetails = User.builder().username("basakaritra10@gmail.com").password(passwordEncoder().encode("Aritra123")).roles("ADMIN").build();
-        UserDetails userDetails1 = User.builder().username("sarkarchandan32@gmail.com").password(passwordEncoder().encode("Chandan123")).roles("USER").build();
-        return new InMemoryUserDetailsManager(userDetails,userDetails1);
+    	List<UserCredentials> userList = userRepository.findAll();
+    	List<UserDetails> userDetailsList = new ArrayList<>();
+    	for(UserCredentials user:userList) {
+    		UserDetails userDetails = User.builder().username(user.getEmail()).password(passwordEncoder().encode(user.getPassword())).roles(user.getRole()).build();
+    		userDetailsList.add(userDetails);
+    	}
+        return new InMemoryUserDetailsManager(userDetailsList);
     }
 
     //Default Password Encoder from Spring Security.

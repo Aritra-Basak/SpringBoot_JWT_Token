@@ -1,6 +1,6 @@
 package com.java.springBoot_jwt_demo.controller;
 
-import com.java.springBoot_jwt_demo.entity.User;
+import com.java.springBoot_jwt_demo.entity.UserCredentials;
 import com.java.springBoot_jwt_demo.serviceInterface.ServiceIntf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,19 +11,19 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/private")
+@RequestMapping(value ="/private")
 public class PrivateController {
 
     @Autowired
     private ServiceIntf service;
 
 
-    @GetMapping(value = "/test")
+    @GetMapping(value ="/test")
     public String user(){
         return "Hello from Spring Boot";
     }
     @GetMapping(value="/users")
-    public List<User> getAllUsers(){
+    public List<UserCredentials> getAllUsers(){
         return service.getAllUser();
     }
     @GetMapping(value="/current-user")
@@ -31,6 +31,4 @@ public class PrivateController {
         //It will return the current Logged-In user name.
         return principal.getName();
     }
-
-
 }
