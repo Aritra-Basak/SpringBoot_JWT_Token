@@ -36,6 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private Logger logger = LoggerFactory.getLogger(OncePerRequestFilter.class);
     @Autowired
     private JwtHelper jwtHelper;
+    
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -52,12 +53,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 username = this.jwtHelper.getUsernameFromToken(token);
             } catch (IllegalArgumentException e) {
                 logger.info("Illegal Argument while fetching the username !!");
+                request.setAttribute("errorMessage","Illegal Argument while fetching the username !!");
                 e.printStackTrace();
             } catch (ExpiredJwtException e) {
-                logger.info("Given jwt token is expired !!");
+                logger.info("Given jwt token has expired !!");
+                request.setAttribute("errorMessage","Given JWT has expired !!");
                 e.printStackTrace();
             } catch (MalformedJwtException e) {
-                logger.info("Some changed has done in token !! Invalid Token");
+                logger.info("JWT token has been Malformed!! Invalid Token");
+                request.setAttribute("errorMessage","JWT token has been Malformed!! Invalid Token");
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -76,7 +80,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
-                logger.info("Validation fails !!");
+                logger.info("Validation failed! Bad credentials");
+                request.setAttribute("errorMessage","Validation failed! Bad credentials");
             }
         }
         filterChain.doFilter(request, response);
