@@ -6,9 +6,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 //This class contains method related to perform operations with jwt token like generateToken, validateToken etc.
@@ -50,6 +53,11 @@ public class JwtHelper {
     //generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("Issued By", "API's by Aritra");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        claims.put("Issued Date", dtf.format(now));
+        claims.put("ID", UUID.randomUUID().toString().toUpperCase());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

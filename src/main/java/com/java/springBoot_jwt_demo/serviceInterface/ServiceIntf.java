@@ -1,11 +1,18 @@
 package com.java.springBoot_jwt_demo.serviceInterface;
 
-import com.java.springBoot_jwt_demo.entity.UserCredentials;
+import com.java.springBoot_jwt_demo.entity.ServiceResponse;
 
-import java.util.List;
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.http.ResponseEntity;
 
 public interface ServiceIntf {
 
-    public List<UserCredentials> getAllUser();
-
+	 public ServiceResponse getAllUser();
+	 
+	 public ServiceResponse getUser(int id);
+	 
+	 public ResponseEntity<?> seviceCheck();
+	 
+	 public ServiceResponse getUser(HttpServletRequest request);
 }

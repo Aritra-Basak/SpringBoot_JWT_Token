@@ -1,6 +1,7 @@
 package com.java.springBoot_jwt_demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -43,11 +44,13 @@ public class UserCredentials {
     @JsonProperty(value="Role")
     String role;
     
-    @JsonIgnore
+    
     @Column(name="is_active")
     int isActive;
     
+    
     @JsonProperty(value="User_is_Active")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
     String isActiveValue;
     
 }

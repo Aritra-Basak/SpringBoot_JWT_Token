@@ -33,7 +33,7 @@ public class AppConfig {
     	List<UserCredentials> userList = userRepository.findAll();
     	List<UserDetails> userDetailsList = new ArrayList<>();
     	for(UserCredentials user:userList) {
-    		UserDetails userDetails = User.builder().username(user.getEmail()).password(passwordEncoder().encode(user.getPassword())).roles(user.getRole()).build();
+    		UserDetails userDetails = User.builder().username(user.getEmail()).password(passwordEncoder().encode(user.getPassword())).authorities(user.getRole()).roles(user.getRole()).build();
     		userDetailsList.add(userDetails);
     	}
         return new InMemoryUserDetailsManager(userDetailsList);

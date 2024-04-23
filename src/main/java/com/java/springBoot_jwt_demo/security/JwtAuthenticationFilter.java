@@ -69,9 +69,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         } else {
             logger.info("Invalid Header Value !! ");
         }
-        //Security Context manages all the security related details for Spring Security
+        /*  In Spring Security, the SecurityContextHolder is a holder for the security context of the current thread.
+         *  It is a central point of access for the security information associated with the current thread of execution.
+         *  The security context typically includes details about the currently authenticated principal (user), such as their username, roles, 
+         *  and other authentication-related information.*/
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            //fetch user detail from username
+            //fetch user-detail by the username.
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
             if (validateToken) {
