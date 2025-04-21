@@ -30,6 +30,7 @@ public class AppConfig {
  
 	@Bean
     public UserDetailsService userDetailsService(){
+		System.out.println("Inside AppConfig:User Details Service......");
     	List<UserCredentials> userList = userRepository.findAll();
     	List<UserDetails> userDetailsList = new ArrayList<>();
     	for(UserCredentials user:userList) {

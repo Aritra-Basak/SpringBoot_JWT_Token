@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.java.springBoot_jwt_demo.entity;
+package com.java.springBoot_jwt_demo.dto;
 
 import org.springframework.http.HttpStatus;
 

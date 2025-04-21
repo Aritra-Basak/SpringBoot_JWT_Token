@@ -1,6 +1,6 @@
 package com.java.springBoot_jwt_demo.controller;
 
-import com.java.springBoot_jwt_demo.entity.ServiceResponse;
+import com.java.springBoot_jwt_demo.dto.ServiceResponse;
 import com.java.springBoot_jwt_demo.serviceInterface.ServiceIntf;
 
 

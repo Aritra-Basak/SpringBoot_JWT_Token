@@ -22,6 +22,7 @@ public class SecurityConfig {
     @SuppressWarnings("deprecation")
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    	System.out.println("Inside SecurityConfig: securityFilterChain Service......");
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests().

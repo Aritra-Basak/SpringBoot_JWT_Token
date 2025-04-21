@@ -1,10 +1,10 @@
 package com.java.springBoot_jwt_demo.serviceInterface;
 
-import com.java.springBoot_jwt_demo.entity.ServiceResponse;
-
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
+
+import com.java.springBoot_jwt_demo.dto.ServiceResponse;
 
 public interface ServiceIntf {
 

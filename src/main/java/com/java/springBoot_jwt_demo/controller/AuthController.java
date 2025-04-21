@@ -1,7 +1,7 @@
 package com.java.springBoot_jwt_demo.controller;
 
-import com.java.springBoot_jwt_demo.entity.JwtRequest;
-import com.java.springBoot_jwt_demo.entity.JwtResponse;
+import com.java.springBoot_jwt_demo.dto.JwtRequest;
+import com.java.springBoot_jwt_demo.dto.JwtResponse;
 import com.java.springBoot_jwt_demo.security.JwtHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
